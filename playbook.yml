@@ -1,0 +1,17 @@
+﻿---
+- name: Deploy Conduit Application
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Ensure backend dependencies are installed
+      pip:
+        requirements: "{{ playbook_dir }}/backend/requirements.txt"
+    - name: Copy .env.example to .env
+      copy:
+        src: "{{ playbook_dir }}/backend/.env.example"
+        dest: "{{ playbook_dir }}/backend/.env"
+        force: no
+    - name: Run Conduit Backend API
+      command: python3 -m uvicorn conduit.app:app --host 0.0.0.0 --port 8000
+      async: 10
+      poll: 0
