@@ -26,7 +26,7 @@ jobs:
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
           script: |
             cd /home/azureuser/devsecops-conduit || git clone https://github.com/srcore-09/devsecops-conduit.git /home/azureuser/devsecops-conduit
             cd /home/azureuser/devsecops-conduit
